@@ -9,9 +9,9 @@ const navigation = [
 ];
 
 export default function Sidebar() {
-  const pathname = usePathname();
+  const pathname = usePathname() || '/';
   const posts = getSortedPostsData();
-  const isBlogPage = pathname.startsWith('/blog');
+  const isBlogSection = pathname.startsWith('/blog');
 
   return (
     <aside className="w-64 fixed left-0 top-0 h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 p-6 overflow-y-auto">
@@ -24,10 +24,10 @@ export default function Sidebar() {
         
         <nav className="space-y-1">
           {navigation.map((item) => {
-            const isActive = 
-              item.href === '/' 
-                ? pathname === '/'
-                : pathname.startsWith(item.href);
+            const isActive = item.href === '/' 
+              ? pathname === '/'
+              : pathname.startsWith(item.href);
+            
             return (
               <div key={item.name}>
                 <Link
@@ -40,9 +40,9 @@ export default function Sidebar() {
                 >
                   {item.name}
                 </Link>
-                
-                {/* Show blog posts under Blog section when active */}
-                {item.href === '/blog' && isActive && (
+
+                {/* Show blog posts under Blog section */}
+                {item.href === '/blog' && isBlogSection && (
                   <div className="ml-4 mt-2 space-y-1 border-l-2 border-gray-200 dark:border-gray-700">
                     {posts.map((post) => (
                       <Link
@@ -67,7 +67,7 @@ export default function Sidebar() {
         <div className="mt-auto pt-8 border-t border-gray-200 dark:border-gray-800">
           <div className="text-sm text-gray-600 dark:text-gray-400">
             <p>© 2024 Sandhya Patil</p>
-            <p className="mt-1">GenAI Product at Adobe Firefly</p>
+            <p className="mt-1">AI, GenAI, Product, and more</p>
           </div>
         </div>
       </div>
