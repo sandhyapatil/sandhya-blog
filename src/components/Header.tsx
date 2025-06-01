@@ -9,7 +9,7 @@ export default function Header() {
         </Link>
         <ul className="flex space-x-6">
           <li>
-            <Link href="/" className="hover:text-gray-600 dark:hover:text-gray-300">
+            <Link href="/blog" className="hover:text-gray-600 dark:hover:text-gray-300">
               Blog
             </Link>
           </li>
