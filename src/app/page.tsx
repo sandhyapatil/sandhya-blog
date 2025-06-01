@@ -1,9 +1,6 @@
-import Header from '@/components/Header';
-
 export default function Home() {
   return (
     <main>
-      <Header />
       <div className="py-12">
         <h1 className="text-4xl font-bold mb-8">Welcome to My Blog</h1>
         <div className="prose dark:prose-invert">

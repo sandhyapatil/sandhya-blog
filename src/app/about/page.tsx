@@ -1,9 +1,6 @@
-import Header from '@/components/Header';
-
 export default function About() {
   return (
     <main>
-      <Header />
       <div className="py-12">
         <h1 className="text-4xl font-bold mb-8">About Me</h1>
         <div className="prose dark:prose-invert">
