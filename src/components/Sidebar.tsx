@@ -11,7 +11,6 @@ const navigation = [
 export default function Sidebar() {
   const pathname = usePathname() || '/';
   const posts = getSortedPostsData();
-  const isBlogSection = pathname.startsWith('/blog');
 
   return (
     <aside className="w-64 fixed left-0 top-0 h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 p-6 overflow-y-auto">
@@ -41,8 +40,8 @@ export default function Sidebar() {
                   {item.name}
                 </Link>
 
-                {/* Show blog posts under Blog section */}
-                {item.href === '/blog' && isBlogSection && (
+                {/* Always show blog posts under Blog section */}
+                {item.href === '/blog' && (
                   <div className="ml-4 mt-2 space-y-1 border-l-2 border-gray-200 dark:border-gray-700">
                     {posts.map((post) => (
                       <Link
