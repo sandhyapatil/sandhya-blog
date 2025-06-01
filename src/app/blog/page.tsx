@@ -8,7 +8,7 @@ export default function Blog() {
 
   return (
     <>
-      <h1 className="text-4xl font-bold mb-8">Blog Posts</h1>
+      <h1 className="text-4xl font-bold mb-8">Articles</h1>
       <div className="space-y-12">
         {posts.map(post => (
           <article key={post.id} className="border-b pb-12">
