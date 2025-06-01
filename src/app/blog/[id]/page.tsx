@@ -13,7 +13,7 @@ export default async function Post({ params }: { params: { id: string } }) {
   const post = getPostData(params.id)
 
   return (
-    <article className="max-w-4xl mx-auto px-4 py-8">
+    <article>
       <header className="mb-8">
         {post.coverImage && (
           <div className="relative w-full mb-8 overflow-hidden rounded-lg">
