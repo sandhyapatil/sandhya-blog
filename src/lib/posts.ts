@@ -2,9 +2,17 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
+interface PostData {
+  id: string;
+  date: string;
+  title: string;
+  description: string;
+  coverImage?: string;
+}
+
 const postsDirectory = path.join(process.cwd(), 'src/posts')
 
-export function getSortedPostsData() {
+export function getSortedPostsData(): PostData[] {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames.map(fileName => {
@@ -21,7 +29,7 @@ export function getSortedPostsData() {
     // Combine the data with the id
     return {
       id,
-      ...(matterResult.data as { date: string; title: string; description: string })
+      ...(matterResult.data as { date: string; title: string; description: string; coverImage?: string })
     }
   })
 
@@ -35,7 +43,7 @@ export function getSortedPostsData() {
   })
 }
 
-export function getPostData(id: string) {
+export function getPostData(id: string): PostData & { content: string } {
   const fullPath = path.join(postsDirectory, `${id}.mdx`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
@@ -45,6 +53,6 @@ export function getPostData(id: string) {
   return {
     id,
     content: matterResult.content,
-    ...(matterResult.data as { date: string; title: string; description: string })
+    ...(matterResult.data as { date: string; title: string; description: string; coverImage?: string })
   }
 } 
