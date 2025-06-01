@@ -14,12 +14,14 @@ export default function Blog() {
           <article key={post.id} className="border-b pb-12">
             <Link href={`/blog/${post.id}`} className="block group">
               {post.coverImage && (
-                <div className="relative w-full h-[300px] mb-6 overflow-hidden rounded-lg">
-                  <img
-                    src={post.coverImage}
-                    alt={`Cover image for ${post.title}`}
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                  />
+                <div className="relative w-full mb-6 overflow-hidden rounded-lg">
+                  <div className="aspect-[16/9] relative">
+                    <img
+                      src={post.coverImage}
+                      alt={`Cover image for ${post.title}`}
+                      className="absolute inset-0 w-full h-full object-contain bg-gray-100 dark:bg-gray-800"
+                    />
+                  </div>
                 </div>
               )}
               <h2 className="text-2xl font-semibold mb-2 group-hover:text-blue-600">
