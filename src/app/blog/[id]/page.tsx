@@ -10,7 +10,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Post({ params }: { params: { id: string } }) {
-  const post = getPostData(params.id)
+  const post = await getPostData(params.id)
 
   return (
     <article>
