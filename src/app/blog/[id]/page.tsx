@@ -10,13 +10,15 @@ export async function generateStaticParams() {
   }))
 }
 
-type PageParams = {
+interface BlogPost {
   id: string;
+  title: string;
+  date: string;
+  content: string;
+  coverImage?: string;
 }
 
-async function Post({ id }: PageParams) {
-  const post = await getPostData(id)
-
+async function BlogPostContent({ post }: { post: BlogPost }) {
   return (
     <article>
       <header className="mb-8">
@@ -46,6 +48,7 @@ async function Post({ id }: PageParams) {
   )
 }
 
-export default async function Page({ params }: { params: PageParams }) {
-  return <Post id={params.id} />
+export default async function Page({ params }: { params: { id: string } }) {
+  const post = await getPostData(params.id)
+  return <BlogPostContent post={post} />
 } 
