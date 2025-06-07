@@ -1,15 +1,21 @@
 import { getPostData, getSortedPostsData } from '@/lib/posts'
 import { format } from 'date-fns'
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import Image from 'next/image'
 
 export async function generateStaticParams() {
-  const posts = getSortedPostsData()
+  const posts = await getSortedPostsData()
   return posts.map((post) => ({
     id: post.id,
   }))
 }
 
-export default async function Post({ params }: { params: { id: string } }) {
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default async function Post({ params, searchParams }: Props) {
   const post = await getPostData(params.id)
 
   return (
@@ -18,10 +24,12 @@ export default async function Post({ params }: { params: { id: string } }) {
         {post.coverImage && (
           <div className="relative w-full mb-8 overflow-hidden rounded-lg">
             <div className="aspect-[16/9] relative">
-              <img
+              <Image
                 src={post.coverImage}
                 alt={`Cover image for ${post.title}`}
-                className="absolute inset-0 w-full h-full object-contain bg-gray-100 dark:bg-gray-800"
+                fill
+                className="object-contain bg-gray-100 dark:bg-gray-800"
+                priority
               />
             </div>
           </div>
