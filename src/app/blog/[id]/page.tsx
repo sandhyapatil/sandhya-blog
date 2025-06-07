@@ -10,12 +10,12 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function Post({
-  params,
-}: {
-  params: { id: string }
-}) {
-  const post = await getPostData(params.id)
+type PageParams = {
+  id: string;
+}
+
+async function Post({ id }: PageParams) {
+  const post = await getPostData(id)
 
   return (
     <article>
@@ -44,4 +44,8 @@ export default async function Post({
       </div>
     </article>
   )
+}
+
+export default async function Page({ params }: { params: PageParams }) {
+  return <Post id={params.id} />
 } 
