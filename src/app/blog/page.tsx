@@ -1,5 +1,6 @@
 import { getSortedPostsData } from '@/lib/posts'
 import Link from 'next/link'
+import Image from 'next/image'
 import { format } from 'date-fns'
 
 export default async function Blog() {
@@ -15,10 +16,13 @@ export default async function Blog() {
           <Link href={`/blog/${post.id}`} className="block">
             <div className="relative aspect-[16/9]">
               {post.coverImage ? (
-                <img
+                <Image
                   src={post.coverImage}
                   alt={`Cover image for ${post.title}`}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={posts.indexOf(post) < 2}
                 />
               ) : (
                 <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700" />
