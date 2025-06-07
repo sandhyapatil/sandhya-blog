@@ -10,12 +10,11 @@ export async function generateStaticParams() {
   }))
 }
 
-type Props = {
+export default async function Post({
+  params,
+}: {
   params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-export default async function Post({ params, searchParams }: Props) {
+}) {
   const post = await getPostData(params.id)
 
   return (
