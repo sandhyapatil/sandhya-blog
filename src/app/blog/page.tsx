@@ -2,8 +2,8 @@ import { getSortedPostsData } from '@/lib/posts'
 import Link from 'next/link'
 import { format } from 'date-fns'
 
-export default function Blog() {
-  const posts = getSortedPostsData()
+export default async function Blog() {
+  const posts = await getSortedPostsData()
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
